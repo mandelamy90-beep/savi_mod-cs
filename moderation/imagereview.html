@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Chat Review Queue - Savi</title>
+    <title>Image Review Queue - Savi</title>
     <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -14,20 +14,24 @@
             display: flex;
             zoom: 67%;
         }
+
         .sidebar {
-          margin-top: 70px;
-          margin-left: 40px;
-          margin-right: 40px;
-          margin-bottom: 0;
-          width: 350px; /* Adjust the width as needed */
-          border-top: 1px solid #2578BB;
-          border-right: 1px solid #2578BB;
-          border-left: 1px solid #2578BB;
-          border-bottom: 1px solid #2578BB;
-          border-radius: 6px; /* Adjust the border radius as needed */
-          z-index: 1;
-          overflow-y: auto;
+            margin-top: 70px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 0;
+            width: 350px;
+            /* Adjust the width as needed */
+            border-top: 1px solid #2578BB;
+            border-right: 1px solid #2578BB;
+            border-left: 1px solid #2578BB;
+            border-bottom: 1px solid #2578BB;
+            border-radius: 6px;
+            /* Adjust the border radius as needed */
+            z-index: 1;
+            overflow-y: auto;
         }
+
         .section {
             border-bottom: 4px solid #e0e0e0;
             background-color: #f4f4f4;
@@ -37,24 +41,29 @@
             position: absolute;
             justify-content: space-between;
         }
+
         .welcome {
             float: right;
         }
+
         .home {
             position: absolute;
             margin-top: 55px;
         }
+
         .main-content {
             flex-grow: 1;
             padding: 20px;
             margin-top: 70px;
         }
+
         h1 {
             margin-top: 0;
             font-weight: normal;
             position: absolute;
             margin-top: 30px;
         }
+
         h2 {
             font-size: 18px;
             color: white;
@@ -64,48 +73,60 @@
             height: 15px;
             font-weight: normal;
         }
+
         h3 {
             margin-left: 15px;
             font-size: 16px;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
             margin-left: 15px;
         }
+
         li {
             margin-bottom: 5px;
         }
+
         a {
             text-decoration: none;
             color: #3498db;
         }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
+
         .form-group {
             margin-bottom: 20px;
             margin-top: 30px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
+
         input[type="radio"] {
             margin-right: 5px;
             height: 15px;
         }
-        select, textarea {
+
+        select,
+        textarea {
             width: 100%;
             padding: 5px;
             margin-top: 5px;
         }
+
         textarea {
             height: 100px;
         }
+
         button {
             height: 50px;
             width: 90px;
@@ -115,151 +136,97 @@
             font-size: 20px;
             margin-left: 8px;
         }
+
         select {
             width: 400px;
         }
+
         textarea {
             width: 388px;
         }
+
         hr {
             width: 90%;
             margin-left: 16px;
             border: 1px solid #e0e0e0;
             border-radius: 1em;
         }
+
         .gray {
             color: gray;
         }
+
         .secondhr {
             margin-left: 0px;
             width: 252px;
             margin-top: 12px;
         }
+
         .bold {
             font-weight: bold;
         }
+
         .lookup {
             margin-left: 48px;
             height: 36px;
             width: 256px;
             border-radius: 4px;
         }
+
         .marginleft {
             margin-left: 16px;
         }
+
         .margintop {
             margin-top: 8px;
         }
+
         .marginright {
             margin-left: 20px;
         }
+
         .marginright2 {
             margin-left: 9px;
         }
+
         button:hover {
             cursor: pointer;
         }
+
         button:active {
             background-color: #2068a0;
         }
+
         .resultstable {
             margin-top: 96px;
             position: absolute;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid;
             border-color: lightgray;
             padding: 2vh;
             text-align: left;
         }
+
         .bigger {
             font-size: 20px;
         }
+
         .red {
             background-color: red;
             color: red;
         }
+
         .hidden {
             display: none;
         }
+
         input {
             font-size: 22px;
         }
-        .review-container{
-            background-color: #e0e0e0;
-            width: 50%;
-            text-align: center;
-         }
-         .chat{
-            padding: 1vh;
-            width: 30vh;
-            height: fit-content;
-            background-color: #dac69e;
-            text-align: center;
-            border-radius: 10px;
-         }
-         .chat-id{
-            color: #2578BB;
-         }
-         .chat-main{
-            color: black;
-            font-size: medium
-         }
-        .controls{
-            padding-bottom: 1vh;
-        }
-        #spacer{
-            width: 5vh;
-            background-color: #e0e0e0;
-            color: #e0e0e0;
-        }
-        .btn-med-approve{
-            background-color: rgb(47, 202, 106);
-            border-color: aquamarine
-        }
-        .btn-med-approve:active{
-            background-color: rgb(42, 182, 96);
-            border-color: rgb(95, 221, 179)
-        }
-        .btn-med-more{
-            background-color: #858484;
-            border-color: #a1a0a0
-        }
-        .btn-med-more:active{
-            background-color: #727171;
-            border-color: #8d8c8c
-        }
-        .btn-med-deny{
-            background-color: #b12828;
-            border-color: #d34444
-        }
-        .btn-med-deny:active{
-            background-color: #a02323;
-            border-color: #c43e3e
-        }
-        .start{
-            width: 40%;
-            height: fit-content;
-            background-color: #faeed6;
-            text-align: center;
-            padding-bottom: 1vh;
-        }
-        h4{
-            font-size: xx-large;
-            padding-top: 1vh
-        }
-        h5{
-            font-size: x-large
-        }
-        .btn-med-start{
-            background-color: #858484;
-            border-color: #a1a0a0
-        }
-        .btn-med-start:active{
-            background-color: #757474;
-            border-color: #8f8f8f
-        }
-        </style>
+    </style>
     <script>
         (function () {
             function getCookie(name) {
@@ -276,6 +243,7 @@
         })();
     </script>
 </head>
+
 <body>
     <script src="buttons.js"></script>
     <div class="section">
@@ -294,7 +262,7 @@
     <div class="sidebar">
         <h2>Customer Service</h2>
         <h3>User Admin</h3>
-        <hr>
+        <hr style=";">
         <ul>
             <li><a href="findusers.html">Find user</a></li>
             <li><a href="usertransactions.html">User Transactions</a></li>
@@ -303,7 +271,7 @@
             <li><a href="passwordreset.html">Mass Password Reset</a></li>
         </ul>
         <h3>Billing</h3>
-        <hr>
+        <hr style=";">
         <ul>
             <li><a href="billing/grantmembership.html">Grant Membership</a></li>
             <li><a href="billing/creditcurrencyadjust.html">Adjust Credit & Currency</a></li>
@@ -312,13 +280,13 @@
             <li><a href="billing/purchaseauditlogs.html">Purchase Audit Logs</a></li>
         </ul>
         <h3>Policy Labels</h3>
-        <hr>
+        <hr style=";">
         <ul>
             <li><a href="policylabels/massset.html">Mass Set Policy Labels</a></li>
         </ul>
         <h2>Moderation</h2>
         <h3>Review Queues</h3>
-        <hr>
+        <hr style=";">
         <ul>
             <li><a href="moderation/imagereview.html">Image Review</a></li>
             <li><a href="moderation/chatreview.html">Chat Review</a></li>
@@ -326,7 +294,7 @@
             <li><a href="moderation/userreview.html">User Review</a></li>
         </ul>
         <h3>AI Mod Flows</h3>
-        <hr>
+        <hr style=";">
         <ul>
             <li><a href="moderation/flows/image.html">Image Flow</a></li>
             <li><a href="moderation/flows/chat.html">Chat Flow</a></li>
@@ -335,49 +303,33 @@
         </ul>
     </div>
     <div class="main-content">
-        <center>
-        <div class="start">
-            <h4>Chat Review</h4>
-            <h5>Please press start when ready.</h5>
-            <button class="btn-med-start">Start</button>
-        </div>
-        <div class="review-container hidden">
-            <br>
-            <br>
-            <center>
-            <div class="chat">
-                <div class="chat-id">0123</div>
-                <br>
-                <div class="chat-main">Come on don't be boring</div>
-            </div>
-            </center>
-            <br>
-            <br>
-            <div class="controls">
-                <button class="btn-med-approve">Approve</button>
-                <span id="spacer">111111111</span>
-                <button class="btn-med-more">See More</button>
-                <span id="spacer">111111111</span>
-                <button class="btn-med-deny">Block</button>
-            </div>
-            <div class="action hidden">
-            </div>
-        </div>
-        </center>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const startButton = document.querySelector(".btn-med-start");
-            const startPanel = document.querySelector(".start");
-            const reviewContainer = document.querySelector(".review-container");
 
-            startButton.addEventListener("click", function () {
-                startPanel.classList.add("hidden");
-                reviewContainer.classList.remove("hidden");
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select all buttons on the page
+            const buttons = document.querySelectorAll('button');
+
+            // Add a click event listener to each button
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setTimeout(() => {
+
+                        // Select all elements with the class "results hidden"
+                        const hiddenElements = document.querySelectorAll('.hidden');
+
+                        // Loop through the hidden elements and remove the "hidden" class
+                        hiddenElements.forEach(element => {
+                            element.classList.remove('hidden');
+                        });
+                    }, 800);
+                });
             });
         });
     </script>
-    
+    </script>
     <script>
         // Function to read a cookie by name
         function getCookie(name) {
@@ -412,48 +364,7 @@
             });
         });
     </script>
-    <script>
-        const chatThread = [
-            "Hey, how’s your day?",
-            "All good, just bored lol",
-            "Wanna do something crazy?",
-            "What kind of crazy?",
-            "Something illegal maybe 😈",
-            "Haha stop you're nuts",
-            "You down though?",
-            "I’m not sure, like what?",
-            "Rob a bank 😅",
-            "This is where I stop replying lol",
-            "Come on don't be boring",
-            "It was a joke relax",
-            "You’re so sensitive",
-            "Whatever, I’m done texting you",
-            "Blocked"
-        ];
 
-        const flaggedIndex = 10; // Index of flagged message ("Come on don't be boring")
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const seeMoreButton = document.querySelector(".btn-med-more");
-            const chatBox = document.querySelector(".chat");
-
-            seeMoreButton.addEventListener("click", function () {
-                const start = Math.max(0, flaggedIndex - 10);
-                const end = Math.min(chatThread.length, flaggedIndex + 5);
-                chatBox.innerHTML = ""; // Clear existing message
-
-                for (let i = start; i < end; i++) {
-                    const msg = document.createElement("div");
-                    msg.textContent = chatThread[i];
-                    msg.style.marginBottom = "1vh";
-                    msg.style.padding = "1vh";
-                    msg.style.borderRadius = "6px";
-                    msg.style.backgroundColor = i === flaggedIndex ? "#fff3b0" : "#dac69e";
-                    msg.style.color = "#000";
-                    chatBox.appendChild(msg);
-                }
-            });
-        });
-    </script>
 </body>
+
 </html>
