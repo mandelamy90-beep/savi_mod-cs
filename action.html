@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Moderation Dashboard - Savi</title>
+    <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+        <script>
+        (function () {
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            const token = getCookie("token");
+
+            if (!token) {
+                window.location.href = "/login.html";
+            }
+        })();
+    </script>
+</head>
+<body>
+    <script src="buttons.js"></script>
+    <div class="section">
+        <span>Customer Service & Moderation</span>
+        <div class="welcome">Hi <span id="userDisplay">AdminUsername</span> (<a href="#">logout</a>)</div>
+    </div>
+    <!--
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    !-->
+        <div class="sidebar">
+        <h2>Customer Service</h2>
+        <h3>User Admin</h3>
+        <hr>
+        <ul>
+            <li><a href="findusers.html">Find user</a></li>
+            <li><a href="usertransactions.html">User Transactions</a></li>
+            <li><a href="userpm.html">Send Personal Message</a></li>
+            <li><a href="usermessage.html">Preset Message</a></li>
+            <li><a href="passwordreset.html">Mass Password Reset</a></li>
+        </ul>
+        <h3>Billing</h3>
+        <hr>
+        <ul>
+            <li><a href="billing/grantmembership.html">Grant Membership</a></li>
+            <li><a href="billing/creditcurrencyadjust.html">Adjust Credit & Currency</a></li>
+            <li><a href="billing/imbursements.html">Imbursements</a></li>
+            <li><a href="billing/imbursementsblacklist.html">Imbursements Blacklist</a></li>
+            <li><a href="billing/purchaseauditlogs.html">Purchase Audit Logs</a></li>
+        </ul>
+        <h3>Policy Labels</h3>
+        <hr>
+        <ul>
+            <li><a href="policylabels/massset.html">Mass Set Policy Labels</a></li>
+        </ul>
+        <h2>Moderation</h2>
+        <h3>Review Queues</h3>
+        <hr>
+        <ul>
+            <li><a href="moderation/imagereview.html">Image Review</a></li>
+            <li><a href="moderation/chatreview.html">Chat Review</a></li>
+            <li><a href="moderation/escalationreview.html">Escalation Review</a></li>
+            <li><a href="moderation/userreview.html">User Review</a></li>
+        </ul>
+        <h3>AI Mod Flows</h3>
+        <hr>
+        <ul>
+            <li><a href="moderation/flows/image.html">Image Flow</a></li>
+            <li><a href="moderation/flows/chat.html">Chat Flow</a></li>
+            <li><a href="moderation/flows/escalation.html">Escalation Flow</a></li>
+            <li><a href="moderation/flows/user.html">User Flow</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h1>username</h1>
+            <br>
+        </div>
+        <div class="form-group">
+            <label>Account State Override:</label>
+            <div>
+                <input type="radio" name="account-state" id="warn"><span for="warn">Warn</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="ban1"><span for="ban1">Ban 1 Day</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="ban3"><span for="ban3">Ban 3 Days</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="ban7"><span for="ban7">Ban 7 Days</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="ban14"><span for="ban14">Ban 14 Days</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="delete"><span for="delete">Delete</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="poison"><span for="poison">Poison</span>
+            </div>
+            <div>
+                <input type="radio" name="account-state" id="macban"><span for="macban">MAC Ban</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="moderation-reason">Moderation Reason:</label>
+            <select id="moderation-reason">
+                <option value=""></option>
+                <option value="">Spam</option>
+                <option value="">Bullying</option>
+                <option value="">Harassment</option>
+                <option value="">Child Endangerment</option>
+                <option value="">Grooming</option>
+                <option value="">Sexual Content</option>
+                <option value="">Personal Attacks</option>
+                <option value="">Swearing</option>
+                <option value="">Real Life Threats</option>
+                <option value="">Hate Speech</option>
+                <option value="">Discriminatory Content</option>
+                <option value="">Personal Info</option>
+                <option value="">Inappropriate Talk</option>
+                <option value="">Bad Image</option>
+                <option value="">Dispute</option>
+                <option value="">Dating</option>
+                <option value="">Scam</option>
+                <option value="">Known Fraud</option>
+                <option value="">Bot Account</option>
+                <option value="">Alternate Spam Accounts</option>
+                <option value="">General Abuse</option>
+                <option value="">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="preset-message">Preset Message to User:</label>
+            <select id="preset-message">
+                <option value=""></option>
+                <option value="">Spam</option>
+                <option value="">Bullying</option>
+                <option value="">Harassment</option>
+                <option value="">Child Endangerment</option>
+                <option value="">Grooming</option>
+                <option value="">Sexual Content</option>
+                <option value="">Personal Attacks</option>
+                <option value="">Swearing</option>
+                <option value="">Real Life Threats</option>
+                <option value="">Hate Speech</option>
+                <option value="">Discriminatory Content</option>
+                <option value="">Personal Info</option>
+                <option value="">Inappropriate Talk</option>
+                <option value="">Bad Image</option>
+                <option value="">Dispute</option>
+                <option value="">Dating</option>
+                <option value="">Scam</option>
+                <option value="">Known Fraud</option>
+                <option value="">Bot Account</option>
+                <option value="">Alternate Spam Accounts</option>
+                <option value="">General Abuse</option>
+                <option value="">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="user-message">Message to User:</label>
+            <textarea id="user-message"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="internal-note">Internal Moderation Note:</label>
+            <textarea id="internal-note"></textarea>
+        </div>
+        <button>Submit</button>
+        <div class="loading hidden">
+            <div class="loader"></div>
+            <span class="processing">Processing...</span>
+        </div>
+        <div id="success-msg" class="hidden">✔Action completed successfully.</div>
+        <div id="error-msg" class="hidden">✘Action failed.</div>
+
+    </div>
+    <script>
+        document.querySelector("button").addEventListener("click", () => {
+            document.querySelector(".loading").classList.remove("hidden");
+
+            setTimeout(() => {
+                document.querySelector(".loading").classList.add("hidden");
+                document.getElementById("success-msg").classList.remove("hidden");
+            }, 1500);
+        });
+    </script>
+          <script>
+    // Function to read a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Get the "username" cookie and display it
+    const username = getCookie("username");
+    if (username) {
+      document.getElementById("userDisplay").textContent = username;
+    }
+  </script>
+  <script>
+    // Attach logout logic to all <a> tags with text "logout"
+    document.addEventListener("DOMContentLoaded", function () {
+        const logoutLinks = Array.from(document.querySelectorAll('a'))
+            .filter(link => link.textContent.trim().toLowerCase() === "logout");
+
+        logoutLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                // Clear the cookies by setting them to expire
+                document.cookie = "username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+                // Redirect to login or homepage
+                window.location.href = "/login.html"; // Change as needed
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>User PM - Savi</title>
+    <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            zoom: 67%;
+        }
+        .sidebar {
+          margin-top: 70px;
+          margin-left: 40px;
+          margin-right: 40px;
+          margin-bottom: 0;
+          width: 350px; /* Adjust the width as needed */
+          border-top: 1px solid #2578BB;
+          border-right: 1px solid #2578BB;
+          border-left: 1px solid #2578BB;
+          border-bottom: 1px solid #2578BB;
+          border-radius: 6px; /* Adjust the border radius as needed */
+          z-index: 1;
+          overflow-y: auto;
+        }
+        .section {
+            border-bottom: 4px solid #e0e0e0;
+            background-color: #f4f4f4;
+            padding: 15px;
+            height: 15px;
+            width: 98.7%;
+            position: absolute;
+            justify-content: space-between;
+        }
+        .welcome {
+            float: right;
+        }
+        .home {
+            position: absolute;
+            margin-top: 55px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-top: 70px;
+        }
+        h1 {
+            margin-top: 0;
+            font-weight: normal;
+            position: absolute;
+            margin-top: 30px;
+        }
+        h2 {
+            font-size: 18px;
+            color: white;
+            background-color: #2578BB;
+            padding: 20px;
+            margin-top: -5px;
+            height: 15px;
+            font-weight: normal;
+        }
+        h3 {
+            margin-left: 15px;
+            font-size: 16px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 15px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+            height: 15px;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            height: 50px;
+            width: 90px;
+            background-color: #2578BB;
+            color: white;
+            border-radius: 6px;
+            font-size: 20px;
+            margin-left: 8px;
+        }
+        select {
+            width: 400px;
+        }
+        textarea {
+            width: 388px;
+        }
+        hr {
+            width: 90%;
+            margin-left: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 1em;
+        }
+        .gray {
+            color: gray;
+        }
+        .secondhr {
+            margin-left: 0px;
+            width: 252px;
+            margin-top: 12px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .lookup {
+            margin-left: 48px;
+            height: 36px;
+            width: 256px;
+            border-radius: 4px;
+        }
+        .marginleft {
+            margin-left: 16px;
+        }
+        .margintop {
+            margin-top: 8px;
+        }
+        .marginright {
+            margin-left: 20px;
+        }
+        .marginright2 {
+            margin-left: 9px;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+        button:active {
+            background-color: #2068a0;
+        }
+        .resultstable {
+            margin-top: 96px;
+            position: absolute;
+        }
+        th, td {
+            border: 1px solid;
+            border-color: lightgray;
+            padding: 2vh;
+            text-align: left;
+        }
+        .bigger {
+            font-size: 20px;
+        }
+        .red {
+            background-color: red;
+            color: red;
+        }
+        .hidden {
+            display: none;
+        }
+        input {
+            font-size: 22px;
+        }
+    </style>
+        <script>
+        (function () {
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            const token = getCookie("token");
+
+            if (!token) {
+                window.location.href = "/login.html";
+            }
+        })();
+    </script>
+</head>
+<body>
+    <script src="buttons.js"></script>
+    <div class="section">
+        <span>Customer Service & Moderation</span>
+        <div class="welcome">Hi <span id="userDisplay">AdminUsername</span> (<a href="#">logout</a>)</div>
+    </div>
+    <!--
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    !-->
+    <div class="sidebar">
+        <h2>Customer Service</h2>
+        <h3>User Admin</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="findusers.html">Find user</a></li>
+            <li><a href="usertransactions.html">User Transactions</a></li>
+            <li><a href="userpm.html">Send Personal Message</a></li>
+            <li><a href="usermessage.html">Preset Message</a></li>
+            <li><a href="passwordreset.html">Mass Password Reset</a></li>
+        </ul>
+        <h3>Billing</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="billing/grantmembership.html">Grant Membership</a></li>
+            <li><a href="billing/creditcurrencyadjust.html">Adjust Credit & Currency</a></li>
+            <li><a href="billing/imbursements.html">Imbursements</a></li>
+            <li><a href="billing/imbursementsblacklist.html">Imbursements Blacklist</a></li>
+            <li><a href="billing/purchaseauditlogs.html">Purchase Audit Logs</a></li>
+        </ul>
+        <h3>Policy Labels</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="policylabels/massset.html">Mass Set Policy Labels</a></li>
+        </ul>
+        <h2>Moderation</h2>
+        <h3>Review Queues</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="moderation/imagereview.html">Image Review</a></li>
+            <li><a href="moderation/chatreview.html">Chat Review</a></li>
+            <li><a href="moderation/escalationreview.html">Escalation Review</a></li>
+            <li><a href="moderation/userreview.html">User Review</a></li>
+        </ul>
+        <h3>AI Mod Flows</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="moderation/flows/image.html">Image Flow</a></li>
+            <li><a href="moderation/flows/chat.html">Chat Flow</a></li>
+            <li><a href="moderation/flows/escalation.html">Escalation Flow</a></li>
+            <li><a href="moderation/flows/user.html">User Flow</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select all buttons on the page
+            const buttons = document.querySelectorAll('button');
+
+            // Add a click event listener to each button
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setTimeout(() => {
+
+                        // Select all elements with the class "results hidden"
+                        const hiddenElements = document.querySelectorAll('.hidden');
+
+                        // Loop through the hidden elements and remove the "hidden" class
+                        hiddenElements.forEach(element => {
+                            element.classList.remove('hidden');
+                        });
+                    }, 800);
+                });
+            });
+        });
+    </script>
+          <script>
+    // Function to read a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Get the "username" cookie and display it
+    const username = getCookie("username");
+    if (username) {
+      document.getElementById("userDisplay").textContent = username;
+    }
+  </script>
+  <script>
+    // Attach logout logic to all <a> tags with text "logout"
+    document.addEventListener("DOMContentLoaded", function () {
+        const logoutLinks = Array.from(document.querySelectorAll('a'))
+            .filter(link => link.textContent.trim().toLowerCase() === "logout");
+
+        logoutLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                // Clear the cookies by setting them to expire
+                document.cookie = "username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+                // Redirect to login or homepage
+                window.location.href = "/login.html"; // Change as needed
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

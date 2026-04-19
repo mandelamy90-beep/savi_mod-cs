@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Moderation Dashboard - Savi</title>
+    <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+        <script>
+        (function () {
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            const token = getCookie("token");
+
+            if (!token) {
+                window.location.href = "/login.html";
+            }
+        })();
+    </script>
+</head>
+<body>
+    <script src="buttons.js"></script>
+    <div class="section">
+        <span>Customer Service & Moderation</span>
+        <div class="welcome">Hi <span id="userDisplay">AdminUsername</span> (<a href="#">logout</a>)</div>
+    </div>
+    <!--
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    !-->
+    <div class="sidebar">
+        <h2>Customer Service</h2>
+        <h3>User Admin</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="findusers.html">Find user</a></li>
+            <li><a href="usertransactions.html">User Transactions</a></li>
+            <li><a href="userpm.html">Send Personal Message</a></li>
+            <li><a href="usermessage.html">Preset Message</a></li>
+            <li><a href="passwordreset.html">Mass Password Reset</a></li>
+        </ul>
+        <h3>Billing</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="billing/grantmembership.html">Grant Membership</a></li>
+            <li><a href="billing/creditcurrencyadjust.html">Adjust Credit & Currency</a></li>
+            <li><a href="billing/imbursements.html">Imbursements</a></li>
+            <li><a href="billing/imbursementsblacklist.html">Imbursements Blacklist</a></li>
+            <li><a href="billing/purchaseauditlogs.html">Purchase Audit Logs</a></li>
+        </ul>
+        <h3>Policy Labels</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="policylabels/massset.html">Mass Set Policy Labels</a></li>
+        </ul>
+        <h2>Moderation</h2>
+        <h3>Review Queues</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="moderation/imagereview.html">Image Review</a></li>
+            <li><a href="moderation/chatreview.html">Chat Review</a></li>
+            <li><a href="moderation/escalationreview.html">Escalation Review</a></li>
+            <li><a href="moderation/userreview.html">User Review</a></li>
+        </ul>
+        <h3>AI Mod Flows</h3>
+        <hr style=";">
+        <ul>
+            <li><a href="moderation/flows/image.html">Image Flow</a></li>
+            <li><a href="moderation/flows/chat.html">Chat Flow</a></li>
+            <li><a href="moderation/flows/escalation.html">Escalation Flow</a></li>
+            <li><a href="moderation/flows/user.html">User Flow</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <a href="#" class="gray" style="margin-left: 15px">User Lookup</a>
+        <hr class="secondhr">
+        <br>
+        <br>
+        <div class="header">
+            <h1>User</h1>
+        </div>
+        <br>
+        <div class="form-content">
+            <div class="form-group">
+                <span for="preset-message" class="bold">UserId</span>
+                <input class="lookup">
+                <button id="submit">Submit</button>
+
+                <span for="preset-message" class="bold marginleft">UserName</span>
+                <input class="lookup">
+                <button id="submit">Submit</button>
+
+                <span for="preset-message" class="bold marginleft">EmailAddress</span>
+                <input class="lookup">
+                <button id="submit">Submit</button>
+
+            </div>
+        </div>
+        <div class="results hidden" id="resultsid">
+            <h1>User Search Results</h1>
+            <div class="resultstable">
+                <table>
+                    <tr>
+                        <th class="bold bigger">Username</th>
+                        <th class="bold bigger">ID</th>
+                        <th class="bold bigger">Online</th>
+                        <th class="bold bigger">Email</th>
+                        <th class="bold bigger">Roleset</th>
+                        <th class="bold bigger">Creation Date</th>
+                        <th class="bold bigger">Last Activity</th>
+                        <th class="bold bigger">Action</th>
+                    </tr>
+                    <tr>
+                        <td><a class="bigger" href="/user/userid/">username</a></td>
+                        <td class="bigger">userid</td>
+                        <td class="bigger">online</td>
+                        <td class="bigger">email</td>
+                        <td class="bigger">roleset</td>
+                        <td class="bigger">date</td>
+                        <td class="bigger">date</td>
+                        <td class="bigger"><a href="/action.html?userid=userid">Perform Action</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const resultsSection = document.getElementById("resultsid");
+    const resultsTable = resultsSection.querySelector("table tr:nth-child(2)");
+
+    // Attach event listeners to the 3 submit buttons
+    const buttons = document.querySelectorAll('.form-group button');
+
+    buttons.forEach((button, index) => {
+        button.addEventListener('click', async () => {
+            const inputs = document.querySelectorAll('.form-group input');
+            const queryParam = ["id", "username", "email"][index];
+            const queryValue = inputs[index].value.trim();
+
+            if (!queryValue) {
+                alert("Please enter a value");
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://mod-user-search.api.st3.dolphinlabs.ie?${queryParam}=${encodeURIComponent(queryValue)}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Fill table cells with API response
+                const cells = resultsTable.querySelectorAll("td");
+                cells[0].innerHTML = `<a class="bigger" href="/user/${data.id}">${data.username}</a>`;
+                cells[1].textContent = data.id;
+                cells[2].textContent = data.online ?? "null";
+                cells[3].textContent = data.email;
+                cells[4].textContent = data.roleset ?? "null";
+                cells[5].textContent = data.creation_date ?? "null";
+                cells[6].textContent = data.last_activity ?? "null";
+                cells[7].innerHTML = `<a href="/action.html?userid=${data.id}">Perform Action</a>`;
+
+                resultsSection.classList.remove("hidden");
+
+            } catch (err) {
+                console.error(err);
+                alert("Error fetching user data.");
+            }
+        });
+    });
+});
+</script>
+      <script>
+    // Function to read a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Get the "username" cookie and display it
+    const username = getCookie("username");
+    if (username) {
+      document.getElementById("userDisplay").textContent = username;
+    }
+  </script>
+  <script>
+    // Attach logout logic to all <a> tags with text "logout"
+    document.addEventListener("DOMContentLoaded", function () {
+        const logoutLinks = Array.from(document.querySelectorAll('a'))
+            .filter(link => link.textContent.trim().toLowerCase() === "logout");
+
+        logoutLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                // Clear the cookies by setting them to expire
+                document.cookie = "username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+                // Redirect to login or homepage
+                window.location.href = "/login.html"; // Change as needed
+            });
+        });
+    });
+</script>
+</body>
+</html>

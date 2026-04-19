@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login - Savi</title>
+    <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+    <div class="Signin" data-focus-on="username">
+        <h2>Sign in</h2>
+
+        <div class="formRow">
+            <label for="username">Username</label>
+            <input data-val="true" data-val-required="The UserName field is required." id="UserName" name="UserName"
+                type="text" value="">
+        </div>
+        <div class="formRow">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password">
+        </div>
+        <button onclick="sendGetRequest()">Login</button>
+        <p id="wp" style="color: red; width: 250px; margin-top: 15px;"></p>
+
+    </div>
+        <script>
+            const validUsers = {
+                "Admin": {
+                    password: "Rbx.Jira45",
+                    token: "admintoken-xyz123"
+                },
+                "MangoMarc": {
+                    password: "MangoMarc",
+                    token: "modtoken-abc456"
+                },
+                "LoveNorSad": {
+                    password: "Rbx.Jira45",
+                    token: "viewtoken-def789"
+                },
+                 "DeputyJaden": {
+                    password: "DeputyJaden",
+                    token: "persontoken-num012"
+                }
+            };
+
+            function sendGetRequest() {
+                const username = document.getElementById("UserName").value.trim();
+                const password = document.getElementById("password").value;
+                const errorDisplay = document.getElementById("wp");
+
+                if (!username || !password) {
+                    errorDisplay.textContent = "Please enter both username and password.";
+                    return;
+                }
+
+                const user = validUsers[username];
+
+                if (user && user.password === password) {
+                    document.cookie = `username=${encodeURIComponent(username)}; path=/; max-age=31536000`;
+                    document.cookie = `token=${encodeURIComponent(user.token)}; path=/; max-age=31536000`;
+
+                    location.href = "/dashboard.html"; 
+                } else {
+                    errorDisplay.textContent = "Invalid username or password.";
+                }
+            }
+        </script>
+
+
+</body>
+
+</html>
