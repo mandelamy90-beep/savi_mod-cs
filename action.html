@@ -233,10 +233,10 @@
     const params = new URLSearchParams(window.location.search);
     const userId = params.get("userid");
 
-    if (!userId) return;
+    if (!userid) return;
 
     try {
-        const res = await fetch(`https://auth.api.st3.dolphinlabs.ie/username?userId=${encodeURIComponent(userId)}`, {
+        const res = await fetch(`https://auth.api.st3.dolphinlabs.ie/username?userId=${encodeURIComponent(userid)}`, {
             credentials: "include"
         });
 
