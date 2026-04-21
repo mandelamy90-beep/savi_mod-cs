@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cells = resultsTableRow.querySelectorAll("td");
 
                 // Username (with link)
-                cells[0].innerHTML = `<a class="bigger" href="/user/${data.id}">${data.username}</a>`;
+                cells[0].innerHTML = `<a class="bigger" href="/user?userid=${data.id}">${data.username}</a>`;
 
                 // ID
                 cells[1].textContent = data.id ?? "null";
