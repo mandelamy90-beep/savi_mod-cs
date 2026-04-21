@@ -177,4 +177,10 @@
         input {
             font-size: 22px;
         }
+        #success-msg{
+            color: rgb(27, 199, 64);
+        }
+        #error-msg{
+            color: #b91f1f;
+        }
     
