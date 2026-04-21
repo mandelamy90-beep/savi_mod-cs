@@ -228,6 +228,30 @@
         });
     });
 </script>
+<script>
+(async function () {
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get("userId");
+
+    if (!userId) return;
+
+    try {
+        const res = await fetch(`https://auth.api.st3.dolphinlabs.ie/username?userId=${encodeURIComponent(userId)}`, {
+            credentials: "include"
+        });
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+
+        if (data.username) {
+            document.querySelector(".main-content .header h1").textContent = data.username;
+        }
+    } catch (e) {
+        console.error("Failed to fetch username:", e);
+    }
+})();
+</script>
 
 </body>
 </html>
