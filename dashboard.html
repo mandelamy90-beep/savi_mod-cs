@@ -133,12 +133,11 @@
             </div>
         </div>
     </div>
-   <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
     const resultsSection = document.getElementById("resultsid");
-    const resultsTable = resultsSection.querySelector("table tr:nth-child(2)");
+    const resultsTableRow = resultsSection.querySelector("table tr:nth-child(2)");
 
-    // Attach event listeners to the 3 submit buttons
     const buttons = document.querySelectorAll('.form-group button');
 
     buttons.forEach((button, index) => {
@@ -161,15 +160,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Fill table cells with API response
-                const cells = resultsTable.querySelectorAll("td");
+                const cells = resultsTableRow.querySelectorAll("td");
+
+                // Username (with link)
                 cells[0].innerHTML = `<a class="bigger" href="/user/${data.id}">${data.username}</a>`;
-                cells[1].textContent = data.id;
+
+                // ID
+                cells[1].textContent = data.id ?? "null";
+
+                // Online (not provided by API yet)
                 cells[2].textContent = data.online ?? "null";
-                cells[3].textContent = data.email;
+
+                // Email
+                cells[3].textContent = data.email ?? "null";
+
+                // Roleset (not provided)
                 cells[4].textContent = data.roleset ?? "null";
-                cells[5].textContent = data.creation_date ?? "null";
-                cells[6].textContent = data.last_activity ?? "null";
+
+                // Creation Date (formatted)
+                if (data.created_at) {
+                    const date = new Date(data.created_at.replace(" ", "T"));
+                    cells[5].textContent = date.toLocaleString();
+                } else {
+                    cells[5].textContent = "null";
+                }
+
+                // Last Activity (not provided)
+                if (data.last_activity) {
+                    const date = new Date(data.last_activity.replace(" ", "T"));
+                    cells[6].textContent = date.toLocaleString();
+                } else {
+                    cells[6].textContent = "null";
+                }
+
+                // Action link
                 cells[7].innerHTML = `<a href="/action.html?userid=${data.id}">Perform Action</a>`;
 
                 resultsSection.classList.remove("hidden");
@@ -181,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
- </script>
+</script>
       <script>
     // Function to read a cookie by name
     function getCookie(name) {
