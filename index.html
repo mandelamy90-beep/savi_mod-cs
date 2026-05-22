@@ -1,79 +1,204 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <title>Login - Savi</title>
-    <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" type="image/x-icon"
+        href="./1447_man_male_administrator_personal_manager_icon.png">
+
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet"
+        href="./login-style.css">
 </head>
 
 <body>
 
-    <div class="Signin" data-focus-on="username">
+    <div class="Signin">
+
         <h2>Sign in</h2>
 
         <div class="formRow">
-            <label for="username">Username</label>
-            <input data-val="true" data-val-required="The UserName field is required." id="UserName" name="UserName"
-                type="text" value="">
+            <label for="email">Email</label>
+
+            <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email">
         </div>
+
         <div class="formRow">
             <label for="password">Password</label>
-            <input id="password" name="password" type="password">
+
+            <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password">
         </div>
-        <button onclick="sendGetRequest()">Login</button>
-        <p id="wp" style="color: red; width: 250px; margin-top: 15px;"></p>
+
+        <button id="loginButton" onclick="login()">
+            Login
+        </button>
+
+        <p
+            id="wp"
+            style="
+                color: red;
+                width: 250px;
+                margin-top: 15px;
+            ">
+        </p>
 
     </div>
-        <script>
-            const validUsers = {
-                "Admin": {
-                    password: "Rbx.Jira45",
-                    token: "admintoken-xyz123"
-                },
-                "MangoMarc": {
-                    password: "MangoMarc",
-                    token: "modtoken-abc456"
-                },
-                "LoveNorSad": {
-                    password: "Rbx.Jira45",
-                    token: "viewtoken-def789"
-                },
-                 "DeputyJaden": {
-                    password: "DeputyJaden",
-                    token: "persontoken-num012"
-                }
-            };
 
-            function sendGetRequest() {
-                const username = document.getElementById("UserName").value.trim();
-                const password = document.getElementById("password").value;
-                const errorDisplay = document.getElementById("wp");
+    <script>
 
-                if (!username || !password) {
-                    errorDisplay.textContent = "Please enter both username and password.";
-                    return;
+        const API_BASE =
+            "https://mod-auth.api.st3.dolphinlabs.ie";
+
+        async function checkSession() {
+
+            try {
+
+                const response =
+                    await axios.get(
+                        `${API_BASE}/me`,
+                        {
+                            withCredentials: true
+                        }
+                    );
+
+                if (response.data.user) {
+
+                    location.href =
+                        "/dashboard.html";
+
                 }
 
-                const user = validUsers[username];
+            } catch (err) {
 
-                if (user && user.password === password) {
-                    document.cookie = `username=${encodeURIComponent(username)}; path=/; max-age=31536000`;
-                    document.cookie = `token=${encodeURIComponent(user.token)}; path=/; max-age=31536000`;
+                // Not logged in
+                console.log("No active session.");
 
-                    location.href = "/dashboard.html"; 
-                } else {
-                    errorDisplay.textContent = "Invalid username or password.";
-                }
             }
-        </script>
 
+        }
+
+        checkSession();
+
+        async function login() {
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            const errorDisplay =
+                document.getElementById("wp");
+
+            const loginButton =
+                document.getElementById("loginButton");
+
+            errorDisplay.textContent = "";
+
+            // Validation
+            if (!email || !password) {
+
+                errorDisplay.textContent =
+                    "Please enter both email and password.";
+
+                return;
+
+            }
+
+            loginButton.disabled = true;
+            loginButton.textContent = "Logging in...";
+
+            try {
+
+                const response =
+                    await axios.post(
+                        `${API_BASE}/login`,
+                        {
+                            email,
+                            password
+                        },
+                        {
+                            withCredentials: true
+                        }
+                    );
+
+                if (response.data.success) {
+
+                    location.href =
+                        "/dashboard.html";
+
+                } else {
+
+                    errorDisplay.textContent =
+                        "Login failed.";
+
+                }
+
+            } catch (err) {
+
+                console.error(err);
+
+                if (
+                    err.response &&
+                    err.response.data &&
+                    err.response.data.error
+                ) {
+
+                    errorDisplay.textContent =
+                        err.response.data.error;
+
+                } else {
+
+                    errorDisplay.textContent =
+                        "An unexpected error occurred.";
+
+                }
+
+            } finally {
+
+                loginButton.disabled = false;
+                loginButton.textContent = "Login";
+
+            }
+
+        }
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+                    login();
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 
