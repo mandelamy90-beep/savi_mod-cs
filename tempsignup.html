@@ -1,0 +1,291 @@
+<html>
+
+<head>
+    <title>Moderator Signup - Savi</title>
+
+    <link rel="icon"
+        type="image/x-icon"
+        href="./1447_man_male_administrator_personal_manager_icon.png">
+
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet"
+        href="./style.css">
+
+    <style>
+
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial;
+        }
+
+        .Signup {
+            width: 350px;
+            margin: 100px auto;
+            background: #1b1b1b;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .Signup h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .formRow {
+            margin-bottom: 18px;
+        }
+
+        .formRow label {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .formRow input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #2b2b2b;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #0066ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 15px;
+        }
+
+        .success {
+            color: #3ddc84;
+        }
+
+        .error {
+            color: #ff5c5c;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="Signup">
+
+        <h2>Create Moderator Account</h2>
+
+        <div class="formRow">
+            <label>Email</label>
+
+            <input
+                id="email"
+                type="email"
+                autocomplete="email">
+        </div>
+
+        <div class="formRow">
+            <label>Password</label>
+
+            <input
+                id="password"
+                type="password"
+                autocomplete="new-password">
+        </div>
+
+        <div class="formRow">
+            <label>Confirm Password</label>
+
+            <input
+                id="confirmPassword"
+                type="password"
+                autocomplete="new-password">
+        </div>
+
+        <button
+            id="signupButton"
+            onclick="signup()">
+
+            Create Account
+
+        </button>
+
+        <p id="message"></p>
+
+    </div>
+
+    <script>
+
+        const API_BASE =
+            "https://mod-auth.api.st3.dolphinlabs.ie";
+
+        async function signup() {
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+            const message =
+                document.getElementById("message");
+
+            const button =
+                document.getElementById("signupButton");
+
+            message.textContent = "";
+            message.className = "";
+
+            // Validation
+
+            if (!email || !password || !confirmPassword) {
+
+                message.textContent =
+                    "Please fill in all fields.";
+
+                message.className = "error";
+
+                return;
+
+            }
+
+            if (password !== confirmPassword) {
+
+                message.textContent =
+                    "Passwords do not match.";
+
+                message.className = "error";
+
+                return;
+
+            }
+
+            if (password.length < 8) {
+
+                message.textContent =
+                    "Password must be at least 8 characters.";
+
+                message.className = "error";
+
+                return;
+
+            }
+
+            button.disabled = true;
+            button.textContent = "Creating Account...";
+
+            try {
+
+                const response =
+                    await axios.post(
+                        `${API_BASE}/signup`,
+                        {
+                            email,
+                            password
+                        },
+                        {
+                            withCredentials: true
+                        }
+                    );
+
+                if (response.data.success) {
+
+                    message.textContent =
+                        "Account created successfully. Redirecting to login...";
+
+                    message.className = "success";
+
+                    setTimeout(() => {
+
+                        location.href = "/";
+
+                    }, 2000);
+
+                } else {
+
+                    message.textContent =
+                        "Signup failed.";
+
+                    message.className = "error";
+
+                }
+
+            } catch (err) {
+
+                console.error(err);
+
+                if (
+                    err.response &&
+                    err.response.data &&
+                    err.response.data.error
+                ) {
+
+                    message.textContent =
+                        err.response.data.error;
+
+                } else {
+
+                    message.textContent =
+                        "An unexpected error occurred.";
+
+                }
+
+                message.className = "error";
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Create Account";
+
+            }
+
+        }
+
+        // Enter key support
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+                    signup();
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
