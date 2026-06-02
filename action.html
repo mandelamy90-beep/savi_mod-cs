@@ -6,21 +6,7 @@
     <link rel="icon" type="image/x-icon" href="./1447_man_male_administrator_personal_manager_icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./style.css">
-        <script>
-        (function () {
-            function getCookie(name) {
-                const value = `; ${document.cookie}`;
-                const parts = value.split(`; ${name}=`);
-                if (parts.length === 2) return parts.pop().split(';').shift();
-            }
-
-            const token = getCookie("token");
-
-            if (!token) {
-                window.location.href = "/login.html";
-            }
-        })();
-    </script>
+    <script src="./sys.js"></script>
 </head>
 <body>
     <div class="section">
@@ -194,64 +180,5 @@
             }, 1500);
         });
     </script>
-          <script>
-    // Function to read a cookie by name
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    // Get the "username" cookie and display it
-    const username = getCookie("username");
-    if (username) {
-      document.getElementById("userDisplay").textContent = username;
-    }
-  </script>
-  <script>
-    // Attach logout logic to all <a> tags with text "logout"
-    document.addEventListener("DOMContentLoaded", function () {
-        const logoutLinks = Array.from(document.querySelectorAll('a'))
-            .filter(link => link.textContent.trim().toLowerCase() === "logout");
-
-        logoutLinks.forEach(link => {
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-
-                // Clear the cookies by setting them to expire
-                document.cookie = "username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-
-                // Redirect to login or homepage
-                window.location.href = "/login.html"; // Change as needed
-            });
-        });
-    });
-</script>
-<script>
-(async function () {
-    const params = new URLSearchParams(window.location.search);
-    const userId = params.get("userid");
-
-    if (!userId) return;
-
-    try {
-        const res = await fetch(`https://auth.api.st3.dolphinlabs.ie/username?userId=${encodeURIComponent(userId)}`, {
-            credentials: "include"
-        });
-
-        if (!res.ok) return;
-
-        const data = await res.json();
-
-        if (data.username) {
-            document.querySelector(".main-content .header h1").textContent = data.username;
-        }
-    } catch (e) {
-        console.error("Failed to fetch username:", e);
-    }
-})();
-</script>
-
 </body>
 </html>
