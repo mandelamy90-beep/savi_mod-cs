@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>Moderation Dashboard - Savi</title>
@@ -11,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="./sys.js"></script>
 </head>
+
 <body>
     <div class="section">
         <span>Customer Service & Moderation</span>
@@ -25,7 +27,7 @@
             cursor: pointer;
         }
     !-->
-        <div class="sidebar">
+    <div class="sidebar">
         <h2>Customer Service</h2>
         <h3>User Admin</h3>
         <hr>
@@ -183,5 +185,30 @@
             }, 1500);
         });
     </script>
+    <script>
+        (async function () {
+            const params = new URLSearchParams(window.location.search);
+            const userId = params.get("userId");
+
+            if (!userId) return;
+
+            try {
+                const res = await fetch(`https://auth.api.st3.dolphinlabs.ie/username?userId=${encodeURIComponent(userId)}`, {
+                    credentials: "include"
+                });
+
+                if (!res.ok) return;
+
+                const data = await res.json();
+
+                if (data.username) {
+                    document.querySelector(".main-content .header h1").textContent = data.username;
+                }
+            } catch (e) {
+                console.error("Failed to fetch username:", e);
+            }
+        })();
+    </script>
 </body>
+
 </html>
